@@ -13,7 +13,10 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	ws := websocket.Handler(forwardToSSH)
+	ws := websocket.Server{
+		Handshake: nil,
+		Handler:   forwardToSSH,
+	}
 
 	mux.Handle("/ws", ws)
 
